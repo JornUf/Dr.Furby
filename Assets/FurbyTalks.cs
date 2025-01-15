@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FurbyTalks : MonoBehaviour
 {
     [SerializeField] private AudioClip clip;
+    [SerializeField] private TMP_Text clipName;
     private IEnumerator coroutine;
 
     public void FurbyTalk()
@@ -21,5 +23,20 @@ public class FurbyTalks : MonoBehaviour
         ControlArduino.sendTrue();
         yield return new WaitForSeconds(seconds);
         ControlArduino.sendFalse();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (clip == null)
+        {
+            return;
+        }
+
+        if (clipName == null)
+        {
+            return;
+        }
+
+        clipName.text = clip.name;
     }
 }
